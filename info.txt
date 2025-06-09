@@ -143,6 +143,16 @@ Then run PowerShell 7 inside VS Code:
         pwsh
     → If PowerShell 7 opens → ✅ it’s installed properly.
 
+If not
+    notepad $PROFILE
+Add the following snippet as the last line to your PowerShell profile script:
+    oh-my-posh init pwsh | Invoke-Expression
+or  oh-my-posh init pwsh --eval | Invoke-Expression
+    In case the execution policy disables executing unsigned scripts on your system, you can fallback to evaluating the script instead. Use the --eval flag to do so: Be aware this will make initializing the shell slower.
+Once added, reload your profile for the changes to take effect.
+    . $PROFILE
+
+
 Now, add PowerShell 7 to VS Code
     Ctrl+Shift+P → Preferences: Open User Settings (JSON)
 → Add this section to your settings.json:
