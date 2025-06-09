@@ -1,3 +1,5 @@
+VS Code, PowerShell & Windows Terminal setup
+===========================
 If you want Git branch name + status + colors directly in your terminal prompt
 1️⃣ Oh My Posh (for PowerShell, Git Bash, CMD)
 Cross-platform
@@ -273,11 +275,11 @@ In VS Code Terminal:
     Open Settings (Ctrl+,)
     Search for terminal integrated font family
     Set it to the Nerd Font name exactly, e.g., Caskaydia Cove NF or MesloLGS NF
-    
+
 Check Oh My Posh version
     oh-my-posh --version
 
-Node, NVM, NPM 
+Node, NVM, NPM setup
 ===========================
 node -v
     v20.18.3
@@ -353,3 +355,17 @@ Now validate the node, nvm and npm version
     11.4.1
 
 If not working in VS Code, restart VS code
+
+CI-CD setup
+===========================
+Fork https://github.com/FaztWeb/javascript-spa-simple
+git clone https://github.com/ss34nirala34/javascript-spa-simple.git
+Rename it to main
+    git branch -m master main
+    git push -u origin main
+    Update the default branch (on platforms like GitHub/GitLab): 
+Coipilot:
+    Create the Initial files and folders for Github actions
+    Accept
+
+    Replace "npm install" with "npm ci"
