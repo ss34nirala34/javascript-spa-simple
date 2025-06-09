@@ -122,6 +122,9 @@ a path to a local configuration file
 eg:
     oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/jandedobbeleer.omp.json" | Invoke-Expression
     oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/agnosterplus.omp.json" | Invoke-Expression
+    oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/agnoster.minimal.omp.json" | Invoke-Expression
+My Fav: 
+    oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/agnoster.omp.json" | Invoke-Expression
     
 a URL pointing to a remote config
     --config 'https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/jandedobbeleer.omp.json
@@ -196,3 +199,157 @@ Output:
     PSRemotingProtocolVersion      2.3
     SerializationVersion           1.1.0.1
     WSManStackVersion              3.0
+
+MesloLGS Font Settings in VS Code
+--------------------
+{
+	"security.workspace.trust.untrustedFiles": "open",
+	"workbench.colorTheme": "Default Dark Modern",
+	"profiles": {
+		"defaults": {
+			"font": {
+				"face": "MesloLGM Nerd Font"
+			}
+		}
+	},
+	"terminal.integrated.profiles.windows": {
+		"PowerShell": {
+			"source": "PowerShell",
+			"icon": "terminal-powershell"
+		},
+		"PowerShell 7": {
+			"path": "${env:ProgramFiles}\\PowerShell\\7\\pwsh.exe",
+			"icon": "terminal-powershell"
+		},
+		"Command Prompt": {
+			"path": [
+				"${env:windir}\\Sysnative\\cmd.exe",
+				"${env:windir}\\System32\\cmd.exe"
+			],
+			"args": [],
+			"icon": "terminal-cmd"
+		},
+		"Git Bash": {
+			"source": "Git Bash"
+		}
+	},
+	"terminal.integrated.defaultProfile.windows": "PowerShell 7",
+	"editor.fontFamily": "'MesloLGM Nerd Font', 'Courier New', monospace",
+	"editor.fontSize": 14,
+	"editor.lineHeight": 22,
+	"editor.tabSize": 4,
+	"editor.wordWrap": "on",
+	"editor.minimap.enabled": true,
+	"files.autoSave": "afterDelay",
+	"files.autoSaveDelay": 1000,
+	"explorer.confirmDelete": false,
+	"explorer.confirmDragAndDrop": false
+}
+
+
+
+
+Install Windows Terminal (a modern, powerful terminal application from Microsoft that lets you run multiple command-line tools and shells in one place — like PowerShell, Command Prompt (cmd), Azure Cloud Shell, WSL (Linux Bash), and more — all in tabs with rich features.)
+    Multiple tabs & panes: Run several terminals side by side or in tabs
+    It’s much better than the old Windows Console window (the classic PowerShell or cmd window)
+    Supports all modern terminal features and looks great
+    Easy to switch between different shells in tabs
+    Highly customizable for developers and power users
+
+- MesloLGS Font Settings in PowerShell
+--------------------
+Download a font like MesloLGS NF or Caskaydia Cove Nerd Font, FiraCode Nerd Font
+    https://www.nerdfonts.com/font-downloads
+
+Set the terminal font to the Nerd Font say => MesloLGS Nerd Font
+In Windows Terminal:
+    Open Terminal
+    Open Windows Terminal settings (Ctrl+,)
+    Under your PowerShell profile > Appearance, set the font face to the installed Nerd Font, e.g.,
+    "fontFace": "MesloLGL Nerd Font" or "Caskaydia Cove NF"
+    Save
+
+In VS Code Terminal:
+    Open Settings (Ctrl+,)
+    Search for terminal integrated font family
+    Set it to the Nerd Font name exactly, e.g., Caskaydia Cove NF or MesloLGS NF
+    
+Check Oh My Posh version
+    oh-my-posh --version
+
+Node, NVM, NPM 
+===========================
+node -v
+    v20.18.3
+npm -v
+    10.8.2
+
+
+npm install -g npm@latest
+npm -v
+    11.4.1
+
+To update Node.js, you need to:
+✅ Use nvm (Node Version Manager) — easiest and flexible way
+✅ Use nvm-windows (if on Windows)
+✅ Manually install the latest version from nodejs.org
+✅ Use package manager (brew on macOS, apt on Linux)
+
+
+Install nvm-windows: Go to this page: 👉 https://github.com/coreybutler/nvm-windows/releases
+Download the latest nvm-setup.zip (example: nvm-setup.exe)
+Run the installer → install it (default path is usually fine: C:\Program Files\nvm)
+After install, close and reopen PowerShell or Command Prompt.
+Now test: powershell
+nvm version
+    1.2.2
+
+List available versions
+    nvm list available
+
+    |   CURRENT    |     LTS      |  OLD STABLE  | OLD UNSTABLE |
+    |--------------|--------------|--------------|--------------|
+    |    24.1.0    |   22.16.0    |   0.12.18    |   0.11.16    |
+    |    24.0.2    |   22.15.1    |   0.12.17    |   0.11.15    |
+    |    24.0.1    |   22.15.0    |   0.12.16    |   0.11.14    |
+    |    24.0.0    |   22.14.0    |   0.12.15    |   0.11.13    |
+    |   23.11.1    |   22.13.1    |   0.12.14    |   0.11.12    |
+    |   23.11.0    |   22.13.0    |   0.12.13    |   0.11.11    |
+    |   23.10.0    |   22.12.0    |   0.12.12    |   0.11.10    |
+    |    23.9.0    |   22.11.0    |   0.12.11    |    0.11.9    |
+    |    23.8.0    |   20.19.2    |   0.12.10    |    0.11.8    |
+    |    23.7.0    |   20.19.1    |    0.12.9    |    0.11.7    |
+    |    23.6.1    |   20.19.0    |    0.12.8    |    0.11.6    |
+    |    23.6.0    |   20.18.3    |    0.12.7    |    0.11.5    |
+    |    23.5.0    |   20.18.2    |    0.12.6    |    0.11.4    |
+    |    23.4.0    |   20.18.1    |    0.12.5    |    0.11.3    |
+    |    23.3.0    |   20.18.0    |    0.12.4    |    0.11.2    |
+    |    23.2.0    |   20.17.0    |    0.12.3    |    0.11.1    |
+    |    23.1.0    |   20.16.0    |    0.12.2    |    0.11.0    |
+    |    23.0.0    |   20.15.1    |    0.12.1    |    0.9.12    |
+    |   22.10.0    |   20.15.0    |    0.12.0    |    0.9.11    |
+    |    22.9.0    |   20.14.0    |   0.10.48    |    0.9.10    |
+
+Choose a LTS (Long-Term Support) Version
+
+Install the latest version (say v22.x.x)
+    nvm install 22
+or  nvm install 22.16.0
+    Downloading node.js version 22.16.0 (64-bit)...
+    Extracting node and npm...
+
+Use the installed version
+    nvm use 22
+or  nvm use 22.16.0
+
+Now validate the node, nvm and npm version
+    node -v
+    v22.16.0
+
+    nvm -v
+    1.2.2
+
+    npm -v
+    11.4.1
+
+If not working in VS Code, restart VS code
