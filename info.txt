@@ -1,0 +1,188 @@
+If you want Git branch name + status + colors directly in your terminal prompt
+1️⃣ Oh My Posh (for PowerShell, Git Bash, CMD)
+Cross-platform
+Very popular and easy to configure in Windows
+
+2️⃣ Powerlevel10k (for zsh/bash on WSL/Linux/Mac)
+Super fast, super configurable 
+
+
+Using GitLens with Oh My Posh → perfect combo:
+GitLens gives you great Git visuals inside VS Code
+
+Oh My Posh gives you Git branch + status in your terminal prompt
+
+
+Install extension gitlens- supercharged
+
+Oh My Posh
+Themes:     https://ohmyposh.dev/docs/themes
+Install:    https://ohmyposh.dev/docs/installation/windows
+
+Open a PowerShell prompt and run the following command or open it under VS Code > PowerShell:
+    winget install JanDeDobbeleer.OhMyPosh -s winget
+
+Output:
+    Found Oh My Posh [JanDeDobbeleer.OhMyPosh] Version 26.4.1
+    This application is licensed to you by its owner.
+    Microsoft is not responsible for, nor does it grant any licenses to, third-party packages.
+    Downloading https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v26.4.1/install-x64.msi
+    ██████████████████████████████  5.73 MB / 5.73 MB
+    Successfully verified installer hash
+    Starting package install...
+    Successfully installed
+
+This installs a couple of things:
+    oh-my-posh.exe - Windows executable
+    themes - The latest Oh My Posh themes
+
+Restart the terminal and reload windows in VS code. Also open a new PowerShell terminal
+If there is any error like below means ExecutionPolicy is too restrictive (default is Restricted or AllSigned on corporate or fresh installs), it blocks the profile from running.
+Error on Starting
+    Windows PowerShell
+    Copyright (C) Microsoft Corporation. All rights reserved.
+    Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+    . : File C:\Users\sudhanshu.shekhar\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1 cannot be loaded
+    because running scripts is disabled on this system. For more information, see about_Execution_Policies at
+    https:/go.microsoft.com/fwlink/?LinkID=135170.
+    At line:1 char:3
+    + . 'C:\Users\sudhanshu.shekhar\Documents\WindowsPowerShell\Microsoft.P ...
+    +   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        + CategoryInfo          : SecurityError: (:) [], PSSecurityException
+        + FullyQualifiedErrorId : UnauthorizedAccess
+
+Open VS Code terminal as Administrator(If possible)
+Run this command to allow profile scripts to run:
+    Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned -Force
+Explanation:
+    CurrentUser → only your account
+    RemoteSigned → local scripts run, downloaded scripts must be signed (safe)
+
+Close terminal, reopen PowerShell in VS Code, it should not display any error now.
+Verify Execution Policy in PowerShell
+    Get-ExecutionPolicy -Scope CurrentUser
+It should now show:
+    RemoteSigned
+
+Now your profile should run, and Oh My Posh should display Git branch + status in colors.
+
+Now verify, oh-my-posh exe should be located here at C:\Users\username\AppData\Local\Programs\oh-my-posh\bin
+To ensure Oh My Posh command is working
+    (Get-Command oh-my-posh).Source
+Output:
+    C:\Users\sudhanshu.shekhar\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe
+If it shows any error -     Get-Command : The term 'oh-my-posh' is not recognized means something is wrong
+
+Also manually you can verify these paths under Environment Variable:
+POSH_INSTALLER      winget
+POSH_THEME_PATH     C:\Users\sudhanshu.shekhar\AppData\Local\Programs\oh-my-posh\themes\
+Path                C:\Users\sudhanshu.shekhar\AppData\Local\Programs\oh-my-posh\bin\
+
+Go to the location and find 100's of themese would be available to use now
+
+Next
+Now that Oh My Posh is installed, you can go ahead and configure your terminal and shell to get the prompt to look exactly like you want.
+
+install a font
+    oh-my-posh font install
+    This will present a list of Nerd Font libraries, from which you can select Meslo, which includes the Meslo LGM NF font we recommend.
+Select font Meslo and hit enter
+Note that you can also install it directly via:
+    oh-my-posh font install meslo
+
+configure your terminal/editor to use the installed font
+ - Open Settings Editor using Ctrl + ,  or File > Preferences > Settings
+ - or Open settings.json file using Cmd + Shift + P and Type Preferences: Open User Settings (JSON)
+ - In your settings.json file, add the font.face attribute under the defaults attribute in profiles:
+
+    "profiles": {
+        "defaults": {
+            "font": {
+                "face": "MesloLGM Nerd Font"
+            }
+        }
+    }
+
+configure your shell to use Oh My Posh
+- If you have no idea which shell you're currently using, Oh My Posh has a utility switch that can tell that to you.
+    oh-my-posh get shell
+output:
+    powershell
+
+
+(optional) configure a theme or custom prompt configuration
+ - The standard initialization sets Oh My Posh' default theme. This configuration is embedded and thus kept up-to-date with Oh My Posh.
+
+To set a new config/theme you need to change the --config option of the oh-my-posh init <shell> line in your profile or .<shell>rc script (see prompt) and point it to the location of a predefined theme or custom configuration.
+
+There are two possible values the --config flag can handle:
+
+a path to a local configuration file
+    --config 'C:/Users/POSH/jandedobbeleer.omp.json'
+eg:
+    oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/jandedobbeleer.omp.json" | Invoke-Expression
+    oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/agnosterplus.omp.json" | Invoke-Expression
+    
+a URL pointing to a remote config
+    --config 'https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/jandedobbeleer.omp.json
+
+Note: If there is any error while setting theme, 
+    oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/jandedobbeleer.omp.json" | Invoke-Expression                           12:12:01 
+    Get-PSReadLineKeyHandler : A positional parameter cannot be found that accepts argument 'Spacebar'.
+    +             if ((Get-PSReadLineKeyHandler Spacebar).Function -eq 'OhM ...
+    +                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        + CategoryInfo          : InvalidArgument: (:) [Get-PSReadLineKeyHandler], ParameterBindingException
+        + FullyQualifiedErrorId : PositionalParameterNotFound,Microsoft.PowerShell.GetKeyHandlerCommand
+
+Easiest + Recommended → Install PowerShell 7.x
+    winget install --id Microsoft.Powershell --source winget
+
+Then run PowerShell 7 inside VS Code:
+    First, check that PowerShell 7 works:
+    Open Windows Run (Win+R), type:
+        pwsh
+    → If PowerShell 7 opens → ✅ it’s installed properly.
+
+Now, add PowerShell 7 to VS Code
+    Ctrl+Shift+P → Preferences: Open User Settings (JSON)
+→ Add this section to your settings.json:
+
+    "terminal.integrated.profiles.windows": {
+		"PowerShell": {
+			"source": "PowerShell",
+			"icon": "terminal-powershell"
+		},
+		"PowerShell 7": {
+			"path": "${env:ProgramFiles}\\PowerShell\\7\\pwsh.exe",
+			"icon": "terminal-powershell"
+		},
+		"Command Prompt": {
+			"path": [
+				"${env:windir}\\Sysnative\\cmd.exe",
+				"${env:windir}\\System32\\cmd.exe"
+			],
+			"args": [],
+			"icon": "terminal-cmd"
+		},
+		"Git Bash": {
+			"source": "Git Bash"
+		}
+	},
+	"terminal.integrated.defaultProfile.windows": "PowerShell 7",
+
+Sometimes VS Code terminal name still shows "PowerShell"
+    $PSVersionTable
+If PSVersion is 7.x.x → ✅ you are in PowerShell 7.
+
+Output:
+    Name                           Value
+    ----                           -----
+    PSVersion                      7.5.1
+    PSEdition                      Core
+    GitCommitId                    7.5.1
+    OS                             Microsoft Windows 10.0.19045
+    Platform                       Win32NT
+    PSCompatibleVersions           {1.0, 2.0, 3.0, 4.0…}
+    PSRemotingProtocolVersion      2.3
+    SerializationVersion           1.1.0.1
+    WSManStackVersion              3.0
